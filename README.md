@@ -73,8 +73,7 @@ MASTER/
 │       │   │   └── service/
 │       │   │       └── SampleService.java     # Service Layer transaksi bisnis
 │       │   │
-│       │   ├── MasterApplication.java  # Main Application Entrypoint
-│       │   └── status.json             # Dokumen standardisasi format JSON API
+│       │   └── MasterApplication.java  # Main Application Entrypoint
 │       │
 │       └── resources/
 │           ├── config/
@@ -94,7 +93,7 @@ MASTER/
 ## 3. Cara Menjalankan Aplikasi (Running Instructions)
 
 ### Prerequisites:
-1. Pastikan Anda memiliki **Java JDK 17** atau yang lebih baru terinstal.
+1. Pastikan Anda memiliki **Java JDK 21** atau yang lebih baru terinstal.
 2. Pastikan database PostgreSQL (sesuai port dan host di `application.yaml`) sudah berjalan.
 
 ### Langkah-Langkah Running:
