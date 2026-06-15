@@ -1,0 +1,58 @@
+# ===================================================================
+# SERVER CONFIGURATION
+# ===================================================================
+server:
+  port: 8081
+
+# ===================================================================
+# SPRING SYSTEM CONFIGURATION
+# ===================================================================
+spring:
+  application:
+    name: master
+
+  # ===================================================================
+  # MULTI-DATASOURCE & MIGRATION CONFIGURATIONS (PostgreSQL)
+  # ===================================================================
+  datasource:
+    # 1. Master Database Configuration
+    master-db:
+      jdbc-url: jdbc:postgresql://localhost:5432/master
+      username: admin
+      password: admin
+      driver-class-name: org.postgresql.Driver
+      flyway:
+        enabled: true        # Set to true to execute migrations on Master DB on startup
+        locations: classpath:db/migration/master
+
+    # 2. Testing Database Configuration
+    testing-db:
+      jdbc-url: jdbc:postgresql://localhost:5433/testing
+      username: admin
+      password: admin
+      driver-class-name: org.postgresql.Driver
+      flyway:
+        enabled: true        # Set to true to execute migrations on Testing DB on startup
+        locations: classpath:db/migration/secondary
+
+# ===================================================================
+# SYSTEM LOGGING CONFIGURATION
+# ===================================================================
+logging:
+  config: classpath:config/logback-spring.xml
+
+# ===================================================================
+# SWAGGER / OPENAPI DOCUMENTATION CONFIGURATION
+# ===================================================================
+springdoc:
+  show-actuator: false       # Set to true if spring-boot-starter-actuator is used
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+  version: 1.0.0
+  title: Master Service API
+  description: Master Service API Documentation
+  contact:
+    name: Pancaran System
+    email: robby.ari@pancaran-logistic.id
