@@ -24,6 +24,7 @@ public class SampleService {
         SampleEntity entity = SampleEntity.builder().name(dto.getName()).build();
         repository.insertJpa(entity);
         dto.setId(entity.getId());
+        dto.setCreatedAt(entity.getCreatedAt());
         return dto;
     }
 
@@ -33,6 +34,7 @@ public class SampleService {
         SampleEntity entity = SampleEntity.builder().name(dto.getName()).build();
         SampleEntity savedEntity = repository.insertJdbc(entity);
         dto.setId(savedEntity.getId());
+        dto.setCreatedAt(savedEntity.getCreatedAt());
         return dto;
     }
 }

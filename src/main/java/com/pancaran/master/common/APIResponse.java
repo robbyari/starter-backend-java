@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class APIResponse<T> {
     private Integer code;
-    private String message;
+    private Object message;
     private T data;
 
     public static <T> APIResponse<T> success(T data) {
@@ -22,7 +22,7 @@ public class APIResponse<T> {
                 .build();
     }
 
-    public static <T> APIResponse<T> success(T data, String message) {
+    public static <T> APIResponse<T> success(T data, Object message) {
         return APIResponse.<T>builder()
                 .code(200)
                 .message(message)
@@ -30,7 +30,7 @@ public class APIResponse<T> {
                 .build();
     }
 
-    public static <T> APIResponse<T> error(Integer code, String message) {
+    public static <T> APIResponse<T> error(Integer code, Object message) {
         return APIResponse.<T>builder()
                 .code(code)
                 .message(message)

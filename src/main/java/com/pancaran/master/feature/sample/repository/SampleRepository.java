@@ -24,13 +24,17 @@ public class SampleRepository {
     // --- 1. JPA Example ---
     public void insertJpa(SampleEntity entity) {
         entityManager.persist(entity);
+        entityManager.flush();
+        entityManager.refresh(entity);
     }
 
     // --- 2. JdbcTemplate Example ---
     public SampleEntity insertJdbc(SampleEntity entity) {
-        String sql = "INSERT INTO example_table (name) VALUES (?) RETURNING id";
-        Long generatedId = jdbcTemplate.queryForObject(sql, Long.class, entity.getName());
-        entity.setId(generatedId);
-        return entity;
+        String sql = "INSERT INTO example_table (name) VALUES (?) RETURNING id, created_at";
+        return jdbcTemplate.queryForObject(sql, (rs, rowNum) -> {
+            entity.setId(rs.getLong("id"));
+            entity.setCreatedAt(rs.getObject("created_at", java.time.OffsetDateTime.class));
+            return entity;
+        }, entity.getName());
     }
 }
